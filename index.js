@@ -4,9 +4,14 @@
 /* Create variables for principal, interest rate, and years. Assign them the values 200000, 0.05, and 30 respectively. Create another value called name and give it the value of your own name.
 */
 
-let principal = '200000';
+let principal = '200000'; //let because this value will change as payments are made
 const interestRate = '0.05';
 const years = '30';
+let name = 'Vickie'; //because name may change
+
+console.log (principal);
+console.log (name);
+
 
 
 
@@ -34,6 +39,8 @@ Hint #2: you'll need to use the `math` object for parts of this calculation!
 
 When your math is correct, monthlyRate will equal 1073.64
 */
+
+
 
 
 
