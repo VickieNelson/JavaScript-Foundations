@@ -38,6 +38,23 @@ const denominator = ((Math.pow((1+monthlyInterestRate), periods))-1);
 
 const monthlyRate = principal*(numerator/denominator); 
 
+//this is a new function made to calculate mortgage
+
+function mortgageEquate (principal, interestRate, years){
+
+    let monthlyInterestRate = (interestRate/12);
+    let periods = (years*12);
+    const numerator = monthlyInterestRate*(Math.pow((1+monthlyInterestRate), periods));
+    const denominator = ((Math.pow((1+monthlyInterestRate), periods))-1);
+    const monthlypayment = principal*(numerator/denominator); 
+
+    return monthlypayment;
+}
+console.log(mortgageEquate(200000, .05,30));
+
+
+
+
 
 // // 🏡 Task 3: Function
 // /* Create a function called `mortgageCalculator` that combines all of the steps from task 1 and 2 and returns a sentence "{Name}, your monthly rate is ${monthlyRate}"
@@ -61,14 +78,15 @@ const monthlyRate = principal*(numerator/denominator);
 
 function mortgageCalculator(){ 
 
-const numerator = monthlyInterestRate*(Math.pow((1+monthlyInterestRate), periods));
+    //(original code not needed as new function was created)
+// const numerator = monthlyInterestRate*(Math.pow((1+monthlyInterestRate), periods));
+// const denominator = ((Math.pow((1+monthlyInterestRate), periods))-1);
+// const monthlyRate = principal*(numerator/denominator); 
 
-const denominator = ((Math.pow((1+monthlyInterestRate), periods))-1);
-
-const monthlyRate = principal*(numerator/denominator); 
+let x = mortgageEquate(principal, interestRate, years);//calls function code from above
 
 //the console.log return
- console.log(name+", your monthly rate is "+monthlyRate); 
+ console.log(name+", your monthly rate is "+x); 
 	
 //  console.log( "Calcualtor 1" );
 
@@ -87,12 +105,11 @@ mortgageCalculator();
 // */
 
 function mortgageCalculator2(P, I, N){ 
-let principal = P;
-let interestRate = I;
-let years = N;
 
+let x = mortgageEquate (P, I, N);
 //     //the console.log return
- console.log(name+', your monthly rate is '+monthlyRate);
+
+ console.log(name+', your monthly rate is '+x);
 // console.log( "Calculator 2" );
 
  }
@@ -108,20 +125,25 @@ let years = N;
 // */
 
 function mortgageCalculator3 (P,I,N,score){
-let interestRate = I; //this applies new variable overriding const interestRate for this function content only.
 
 if (score>740 && score<800) {
-    interestRate = (interestRate-.005);
+    I = (I - .005);
 }
 
-if (score<660) {
-    interestRate = (interestRate+.005);
+else if (score<660) {
+    I = (I + .005);
  }
-console.log(interestRate);
- 
+
+
+// console.log(I);
+//if i was stopping here but... 
+
+//this calculates new payment
+let x = mortgageEquate (P,I,N);
+console.log(name+', your monthly rate is '+x);
 }
 
-mortgageCalculator3 (2000000, 0.05, 30, 750);
+mortgageCalculator3 (2000000, 0.05, 30, 700);
 
 // 🏡 Task 6: Loops
 /* Write a new function called variableInterestRate. This function should be the same as mortgageCalculator, except it should console.log the monthly payment for 10 different interest rates at 0.5% increments plus or minus 2% from the inputted interest rate. Complete these calculations using a for loop.
@@ -139,43 +161,25 @@ For example, variableInterestRate(200000, 0.04, 30) should console.log:
 "{Name}, with an interest rate of 0.06, your monthly rate is $1199"
 */
 
-function variableInterestRate (P, I, N){
 
-        let principal = P;
-        let interestRate = I;
-        let years = N;
-        let name = 'Vickie'; //because name may change
-        let variableRate = interestRate-0.02;
+function variableInterestRate (P,I,N){
 
-        let monthlyInterestRate = (variableRate/12);
-        let periods = (years*12);
-        
-        const numerator = monthlyInterestRate*(Math.pow((1+monthlyInterestRate), periods));
-        const denominator = ((Math.pow((1+monthlyInterestRate), periods))-1);
-        let monthlyRate = principal * (numerator/denominator); 
-
-
-        for (let i = 0; i < 10; i++, variableRate= Math.round((variableRate+.005)*1000)/1000)
-      
+    I = I - .02;
+    for (let i = 0; i<10; i++){ 
     
-            console.log(name+', with an interest rate of '+variableRate+' , your monthly rate is '+monthlyRate);
-
-        }
-
-        variableInterestRate(200000, 0.04, 30);
+    let y = mortgageEquate (P,I,N); 
+        I = (I+.005);
+        I = Math.round(I*1000)/1000;
 
 
+console.log(name+', with an interest rate of '+I+', your monthly rate is '+y);
+    }
+}
+
+variableInterestRate (200000, .04, 30);
 
 
 
-
-
-    
-    
-    
-
-    //call the function to run code 
-    variableInterestRate(200000, .05, 30);
 
 
 
